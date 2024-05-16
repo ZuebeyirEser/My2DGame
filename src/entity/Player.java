@@ -20,21 +20,21 @@ public class Player extends Entity{
         getPlayerImage();
     }
     public void setDefaultValues() {
-        x = 100;
-        y = 100;
-        speed = 4;
-        direction = "down";
+        setX(100);
+        setY(100);
+        setSpeed(4);
+        setDirection("down");
     }
         public void getPlayerImage() {
             try {
-                up1 = ImageIO.read(getClass().getResourceAsStream("/player/cat-up-1.png"));
-                up2 = ImageIO.read(getClass().getResourceAsStream("/player/cat-up-2.png"));
-                down1 = ImageIO.read(getClass().getResourceAsStream("/player/cat-down-1.png"));
-                down2 = ImageIO.read(getClass().getResourceAsStream("/player/cat-down-2.png"));
-                right1 = ImageIO.read(getClass().getResourceAsStream("/player/cat-right-1.png"));
-                right2 = ImageIO.read(getClass().getResourceAsStream("/player/cat-right-2.png"));
-                left1 = ImageIO.read(getClass().getResourceAsStream("/player/cat-left-1.png"));
-                left2 = ImageIO.read(getClass().getResourceAsStream("/player/cat-left-2.png"));
+                setUp1(ImageIO.read(getClass().getResourceAsStream("/player/cat-up-1.png")));
+                setUp2(ImageIO.read(getClass().getResourceAsStream("/player/cat-up-2.png")));
+                setDown1(ImageIO.read(getClass().getResourceAsStream("/player/cat-down-1.png")));
+                setDown2(ImageIO.read(getClass().getResourceAsStream("/player/cat-down-2.png")));
+                setRight1(ImageIO.read(getClass().getResourceAsStream("/player/cat-right-1.png")));
+                setRight2(ImageIO.read(getClass().getResourceAsStream("/player/cat-right-2.png")));
+                setLeft1(ImageIO.read(getClass().getResourceAsStream("/player/cat-left-1.png")));
+                setLeft2(ImageIO.read(getClass().getResourceAsStream("/player/cat-left-2.png")));
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -44,26 +44,26 @@ public class Player extends Entity{
     public void update() {
         if (keyHandler.upPressed == true || keyHandler.downPressed == true || keyHandler.leftPressed == true || keyHandler.rightPressed == true) {
             if (keyHandler.upPressed == true) {
-                direction = "up";
-                y -= speed;
+                setDirection("up");
+                setY(getY() - getSpeed());
             } else if (keyHandler.downPressed == true) {
-                direction = "down";
-                y += speed;
+                setDirection("down");
+                setY(getY() + getSpeed());
             } else if (keyHandler.leftPressed == true) {
-                direction = "left";
-                x -= speed;
+                setDirection("left");
+                setX(getX() - getSpeed());
             } else if (keyHandler.rightPressed == true) {
-                direction = "right";
-                x += speed;
+                setDirection("right");
+                setX(getX() + getSpeed());
             }
-            spriteCounter++;
-            if (spriteCounter > 12) {
-                if (spriteNumber == 1) {
-                    spriteNumber = 2;
-                } else if (spriteNumber == 2) {
-                    spriteNumber = 1;
+            incrementSpriceCounter();
+            if (getSpriteCounter() > 12) {
+                if (getSpriteCounter() == 1) {
+                    setSpriteNumber(2);
+                } else if (getSpriteCounter() == 2) {
+                    setSpriteNumber(1);
                 }
-                spriteCounter = 0;
+                setSpriteCounter(0);
             }
         }
     }
@@ -71,43 +71,44 @@ public class Player extends Entity{
 //     graphics2D.setColor(Color.white);
 //     graphics2D.fillRect(x,y,gamePanel.getTileSize(), gamePanel.getTileSize());
         BufferedImage bufferedImage =  null;
-        switch (direction) {
+
+        switch (getDirection()) {
             case "up":
-                if (spriteNumber == 1) {
-                    bufferedImage = up1;
+                if (getSpriteNumber() == 1) {
+                    bufferedImage = getUp1();
                 }
-                if (spriteNumber == 2) {
-                    bufferedImage = up2;
+                if (getSpriteNumber() == 2) {
+                    bufferedImage = getUp2();
                 }
                 break;
             case "down":
-                if (spriteNumber == 1) {
-                    bufferedImage = down1;
+                if (getSpriteNumber() == 1) {
+                    bufferedImage = getDown1();
                 }
-                if (spriteNumber == 2) {
-                    bufferedImage = down2;
+                if (getSpriteNumber() == 2) {
+                    bufferedImage = getDown2();
                 }
                 break;
             case "left":
-                if (spriteNumber == 1) {
-                    bufferedImage = left1;
+                if (getSpriteNumber() == 1) {
+                    bufferedImage = getLeft1();
                 }
-                if (spriteNumber == 2) {
-                    bufferedImage = left2;
+                if (getSpriteNumber() == 2) {
+                    bufferedImage = getLeft2();
                 }
                 break;
             case "right":
-                if (spriteNumber == 1) {
-                    bufferedImage = right1;
+                if (getSpriteNumber() == 1) {
+                    bufferedImage = getRight1();
                 }
-                if (spriteNumber == 2) {
-                    bufferedImage = right2;
+                if (getSpriteNumber() == 2) {
+                    bufferedImage = getRight2();
                 }
                 break;
         }
         graphics2D.drawImage(bufferedImage,
-                x,
-                y,
+                getX(),
+                getY(),
                 gamePanel.getTileSize(),
                 gamePanel.getTileSize(),
                 null);
