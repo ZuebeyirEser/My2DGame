@@ -57,10 +57,10 @@ public class Player extends Entity{
                 setX(getX() + getSpeed());
             }
             incrementSpriceCounter();
-            if (getSpriteCounter() > 12) {
-                if (getSpriteCounter() == 1) {
+            if (getSpriteCounter() > 7) {
+                if (getSpriteNumber() == 1) {
                     setSpriteNumber(2);
-                } else if (getSpriteCounter() == 2) {
+                } else if (getSpriteNumber() == 2) {
                     setSpriteNumber(1);
                 }
                 setSpriteCounter(0);

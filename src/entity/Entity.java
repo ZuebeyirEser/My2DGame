@@ -9,6 +9,7 @@ public class Entity {
     private BufferedImage up1, up2, down1, down2, right1, right2, left1, left2;
     private String direction;
     private int spriteCounter = 0;
+    private int spriteNumber = 1;
 
     public  void incrementSpriceCounter() {
         spriteCounter++;
@@ -126,5 +127,5 @@ public class Entity {
         this.spriteNumber = spriteNumber;
     }
 
-    private int spriteNumber = 1;
+
 }
