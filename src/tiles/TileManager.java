@@ -12,13 +12,14 @@ import java.io.InputStreamReader;
 public class TileManager {
     GamePanel gamePanel;
     Tile[] tile;
-    int mapTileNum[][];
+    int[][] mapTileNum;
 
     public TileManager(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
         tile = new Tile[10];
         mapTileNum = new int[gamePanel.getMaxScreenColumn()][gamePanel.getMaxScreenRow()];
         getTileImage();
+        loadMap();
 
     }
 
@@ -31,9 +32,18 @@ public class TileManager {
             while (col < gamePanel.getMaxScreenColumn() && row < gamePanel.getMaxScreenRow()) {
                 String line = bufferedReader.readLine();
                 while (col < gamePanel.getMaxScreenColumn()) {
-                    String numbers[] = line.split(" ");
+                    String[] numbers = line.split(" ");
+                    int num = Integer.parseInt(numbers[col]);
+                    mapTileNum[col][row] = num;
+                    col++;
                 }
+                if (col == gamePanel.getMaxScreenColumn()) {
+                    col = 0;
+                    row++;
+                }
+
             }
+            bufferedReader.close();
         } catch (Exception e) {
 
         }
@@ -54,12 +64,14 @@ public class TileManager {
 //        graphics2D.drawImage(tile[0].bufferedImage,0,0,gamePanel.getTileSize(),gamePanel.getTileSize(),null);
 //        graphics2D.drawImage(tile[1].bufferedImage,48,0,gamePanel.getTileSize(),gamePanel.getTileSize(),null);
 //        graphics2D.drawImage(tile[2].bufferedImage,96,0,gamePanel.getTileSize(),gamePanel.getTileSize(),null);
+
         int col = 0;
         int row = 0;
         int x = 0;
         int y = 0;
         while (col < gamePanel.getMaxScreenColumn() && row < gamePanel.getMaxScreenRow()) {
-            graphics2D.drawImage(tile[0].bufferedImage,x,y,gamePanel.getTileSize(),gamePanel.getTileSize(),null);
+            int tileNum = mapTileNum[col][row];
+            graphics2D.drawImage(tile[tileNum].bufferedImage,x,y,gamePanel.getTileSize(),gamePanel.getTileSize(),null);
             col++;
             x += gamePanel.getTileSize();
             if (col == gamePanel.getMaxScreenColumn()) {
