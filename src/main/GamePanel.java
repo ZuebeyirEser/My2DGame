@@ -23,13 +23,19 @@ public class GamePanel extends JPanel implements Runnable {
     private final int screenWitdh = tileSize * maxScreenColumn;
     private final int screenHeight = tileSize * maxScreenRow;
 
+    // World Settings
+    private final int maxWorldCol = 50;
+    private final int maxWorldRow = 50;
+    private final int worldWidth = tileSize * maxWorldCol;
+    private final int worldHeight = tileSize * maxWorldRow;
+
 
 
     private int FPS = 60;
     KeyHandler keyHandler = new KeyHandler();
 
     Thread gameThread;
-    Player player = new Player(this,keyHandler);
+    public Player player = new Player(this,keyHandler);
     TileManager tileManager = new TileManager(this);
 
 
@@ -46,6 +52,7 @@ public class GamePanel extends JPanel implements Runnable {
         gameThread.start();
     }
     @Override
+    /*
     public void run() {
 
         double drawInterval = 1_000_000_000D / FPS; // a billion nano sec is equal to 1 sec
@@ -72,6 +79,29 @@ public class GamePanel extends JPanel implements Runnable {
 
         }
     }
+     */
+    public void run() {
+
+        double drawInterval = 1_000_000_000D / FPS; // a billion nano sec is equal to 1 sec
+        double delta = 0;
+        long lasTime = System.nanoTime();
+        long currentTime ;
+        while (gameThread != null) {
+
+            currentTime = System.nanoTime();
+            delta += (currentTime - lasTime) / drawInterval;
+            lasTime = currentTime;
+            if (delta > 1) {
+                update();
+                repaint();
+                delta--;
+            }
+
+
+        }
+
+
+    }
     public void update(){
         player.update();
     }
@@ -82,6 +112,7 @@ public class GamePanel extends JPanel implements Runnable {
         player.draw(graphics2D);
         graphics2D.dispose();
     }
+
 
 
 
@@ -121,5 +152,20 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void setFPS(int FPS) {
         this.FPS = FPS;
+    }
+    public int getMaxWorldColumn() {
+        return maxWorldCol;
+    }
+
+    public int getMaxWorldRow() {
+        return maxWorldRow;
+    }
+
+    public int getWorldWidth() {
+        return worldWidth;
+    }
+
+    public int getWorldHeight() {
+        return worldHeight;
     }
 }

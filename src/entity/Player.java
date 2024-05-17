@@ -13,15 +13,23 @@ public class Player extends Entity{
     GamePanel gamePanel;
     KeyHandler keyHandler;
 
+
+    private final int screenX;
+    private final int screenY;
+
     public Player(GamePanel gamePanel,KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
+
+        screenX = gamePanel.getScreenWitdh()/2 - (gamePanel.getTileSize()/2);
+        screenY = gamePanel.getScreenHeight()/2 - (gamePanel.getTileSize()/2);
+
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues() {
-        setX(100);
-        setY(100);
+        setWorldX(gamePanel.getTileSize() * 2);
+        setWorldY(gamePanel.getTileSize() * 4);
         setSpeed(4);
         setDirection("down");
     }
@@ -45,16 +53,16 @@ public class Player extends Entity{
         if (keyHandler.upPressed == true || keyHandler.downPressed == true || keyHandler.leftPressed == true || keyHandler.rightPressed == true) {
             if (keyHandler.upPressed == true) {
                 setDirection("up");
-                setY(getY() - getSpeed());
+                setWorldY(getWorldY() - getSpeed());
             } else if (keyHandler.downPressed == true) {
                 setDirection("down");
-                setY(getY() + getSpeed());
+                setWorldY(getWorldY() + getSpeed());
             } else if (keyHandler.leftPressed == true) {
                 setDirection("left");
-                setX(getX() - getSpeed());
+                setWorldX(getWorldX() - getSpeed());
             } else if (keyHandler.rightPressed == true) {
                 setDirection("right");
-                setX(getX() + getSpeed());
+                setWorldX(getWorldX() + getSpeed());
             }
             incrementSpriceCounter();
             if (getSpriteCounter() > 7) {
@@ -107,12 +115,22 @@ public class Player extends Entity{
                 break;
         }
         graphics2D.drawImage(bufferedImage,
-                getX(),
-                getY(),
+                screenX,
+                screenY,
                 gamePanel.getTileSize(),
                 gamePanel.getTileSize(),
                 null);
 
+
+    }
+
+    // getter setter
+    public int getScreenX() {
+        return screenX;
+    }
+
+    public int getScreenY() {
+        return screenY;
     }
 
 }
