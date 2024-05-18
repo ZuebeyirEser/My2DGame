@@ -1,5 +1,6 @@
 package entity;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 
@@ -10,6 +11,9 @@ public class Entity {
     private String direction;
     private int spriteCounter = 0;
     private int spriteNumber = 1;
+
+    public Rectangle solidAreaOfThePlayer;
+    public boolean collisionOn = false;
 
     public  void incrementSpriceCounter() {
         spriteCounter++;

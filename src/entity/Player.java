@@ -21,15 +21,21 @@ public class Player extends Entity{
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
 
-        screenX = gamePanel.getScreenWitdh()/2 - (gamePanel.getTileSize()/2);
+        screenX = gamePanel.getScreenWidth()/2 - (gamePanel.getTileSize()/2);
         screenY = gamePanel.getScreenHeight()/2 - (gamePanel.getTileSize()/2);
+
+        solidAreaOfThePlayer = new Rectangle();
+        solidAreaOfThePlayer.x = 8;
+        solidAreaOfThePlayer.y = 16;
+        solidAreaOfThePlayer.width = 32;
+        solidAreaOfThePlayer.height = 32;
 
         setDefaultValues();
         getPlayerImage();
     }
     public void setDefaultValues() {
-        setWorldX(gamePanel.getTileSize() * 2);
-        setWorldY(gamePanel.getTileSize() * 4);
+        setWorldX(gamePanel.getTileSize() * 20);
+        setWorldY(gamePanel.getTileSize() * 15);
         setSpeed(4);
         setDirection("down");
     }
@@ -53,17 +59,38 @@ public class Player extends Entity{
         if (keyHandler.upPressed == true || keyHandler.downPressed == true || keyHandler.leftPressed == true || keyHandler.rightPressed == true) {
             if (keyHandler.upPressed == true) {
                 setDirection("up");
-                setWorldY(getWorldY() - getSpeed());
+
             } else if (keyHandler.downPressed == true) {
                 setDirection("down");
-                setWorldY(getWorldY() + getSpeed());
+
             } else if (keyHandler.leftPressed == true) {
                 setDirection("left");
-                setWorldX(getWorldX() - getSpeed());
+
             } else if (keyHandler.rightPressed == true) {
                 setDirection("right");
-                setWorldX(getWorldX() + getSpeed());
+
             }
+            collisionOn = false;
+            gamePanel.collisionManager.checkTile(this);
+            // if collision false , player can move
+            if (collisionOn == false) {
+                switch (getDirection()) {
+                    case "up":
+                        setWorldY(getWorldY() - getSpeed());
+                        break;
+                    case "down":
+                        setWorldY(getWorldY() + getSpeed());
+                        break;
+                    case "left":
+                        setWorldX(getWorldX() - getSpeed());
+                        break;
+                    case "right":
+                        setWorldX(getWorldX() + getSpeed());
+                        break;
+                }
+
+            }
+
             incrementSpriceCounter();
             if (getSpriteCounter() > 7) {
                 if (getSpriteNumber() == 1) {
