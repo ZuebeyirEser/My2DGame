@@ -19,7 +19,7 @@ public class MyGameStart {
         // this centers the frame
         window.setLocationRelativeTo(null);
         window.setVisible(true);
-
+        gamePanel.setUpTheGame();
         gamePanel.startGameThread();
 
 
