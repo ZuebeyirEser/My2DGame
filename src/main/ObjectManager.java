@@ -1,9 +1,6 @@
 package main;
 
-import objects.ObjectDoor;
-import objects.ObjectFish;
-import objects.ObjectKey;
-import objects.ObjectMouse;
+import objects.*;
 
 public class ObjectManager {
     GamePanel gamePanel;
@@ -62,6 +59,14 @@ public class ObjectManager {
         gamePanel.superObjects[12] = new ObjectMouse();
         gamePanel.superObjects[12].worldX = 35 * gamePanel.getTileSize();
         gamePanel.superObjects[12].worldY = 31 * gamePanel.getTileSize();
+
+        gamePanel.superObjects[13] = new ObjectTramboline();
+        gamePanel.superObjects[13].worldX = 20 * gamePanel.getTileSize();
+        gamePanel.superObjects[13].worldY = 21 * gamePanel.getTileSize();
+
+        gamePanel.superObjects[14] = new ObjectKey();
+        gamePanel.superObjects[14].worldX = 40 * gamePanel.getTileSize();
+        gamePanel.superObjects[14].worldY = 40 * gamePanel.getTileSize();
 
 
 
