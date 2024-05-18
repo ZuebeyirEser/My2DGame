@@ -70,10 +70,10 @@ public class Player extends Entity{
                 setDirection("right");
 
             }
-            collisionOn = false;
+            setCollisionOn(false);
             gamePanel.collisionManager.checkTile(this);
             // if collision false , player can move
-            if (collisionOn == false) {
+            if (isCollisionOn() == false) {
                 switch (getDirection()) {
                     case "up":
                         setWorldY(getWorldY() - getSpeed());

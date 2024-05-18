@@ -25,7 +25,7 @@ public class CollisionManager {
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
                 if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo ].collision == true) {
-                    entity.collisionOn = true;
+                    entity.setCollisionOn(true);
                 }
                 break;
             case "down":
@@ -33,7 +33,7 @@ public class CollisionManager {
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
                 if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo].collision == true) {
-                    entity.collisionOn = true;
+                    entity.setCollisionOn(true);
                 }
                 break;
             case "left":
@@ -41,7 +41,7 @@ public class CollisionManager {
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo].collision == true) {
-                    entity.collisionOn = true;
+                    entity.setCollisionOn(true);
                 }
                 break;
             case "right":
@@ -49,7 +49,7 @@ public class CollisionManager {
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
                 if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo ].collision == true) {
-                    entity.collisionOn = true;
+                    entity.setCollisionOn(true);
                 }
                 break;
         }

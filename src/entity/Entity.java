@@ -13,7 +13,10 @@ public class Entity {
     private int spriteNumber = 1;
 
     public Rectangle solidAreaOfThePlayer;
-    public boolean collisionOn = false;
+
+
+
+    private boolean collisionOn = false;
 
     public  void incrementSpriceCounter() {
         spriteCounter++;
@@ -129,6 +132,14 @@ public class Entity {
 
     public void setSpriteNumber(int spriteNumber) {
         this.spriteNumber = spriteNumber;
+    }
+
+    public boolean isCollisionOn() {
+        return collisionOn;
+    }
+
+    public void setCollisionOn(boolean collisionOn) {
+        this.collisionOn = collisionOn;
     }
 
 
