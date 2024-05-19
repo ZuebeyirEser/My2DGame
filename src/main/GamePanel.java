@@ -31,7 +31,8 @@ public class GamePanel extends JPanel implements Runnable {
 
 
     // System
-    Sound sound = new Sound();
+    Sound music = new Sound();
+    Sound soundEffect = new Sound();
     KeyHandler keyHandler = new KeyHandler();
     public Player player = new Player(this,keyHandler);
     TileManager tileManager = new TileManager(this);
@@ -41,6 +42,8 @@ public class GamePanel extends JPanel implements Runnable {
     // Entity and Object
     public ObjectManager objectManager = new ObjectManager(this);
     public SuperObjects[] superObjectsArray = new SuperObjects[15];
+
+    public UserInterface userInterface = new UserInterface(this);
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -126,21 +129,23 @@ public class GamePanel extends JPanel implements Runnable {
         }
         // player
         player.draw(graphics2D);
+        // UI for keys
+        userInterface.draw(graphics2D);
 
         graphics2D.dispose();
     }
     public void playMusic(int i) {
-        sound.setFile(i);
-        sound.play();
-        sound.loop();
+        music.setFile(i);
+        music.play();
+        music.loop();
     }
     public void stopMusic() {
-        sound.stop();
+        music.stop();
     }
 
     public void playSoundEffect(int i) {
-        sound.setFile(i);
-        sound.play();
+        soundEffect.setFile(i);
+        soundEffect.play();
     }
 
 

@@ -7,7 +7,7 @@ import java.net.URL;
 
 public class Sound {
     Clip clip;
-    URL soundUrl[] = new URL[30];
+    URL[] soundUrl = new URL[30];
 
     public Sound() {
         soundUrl[0] = getClass().getResource("/sounds/cat-adventure-song.wav");

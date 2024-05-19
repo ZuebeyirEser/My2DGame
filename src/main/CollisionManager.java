@@ -24,7 +24,7 @@ public class CollisionManager {
                 entityTopRow = (entityTopWorldY - entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() || gamePanel.tileManager.tile[tileNumberTwo].isCollision()) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -32,7 +32,7 @@ public class CollisionManager {
                 entityBottomRow = (entityBottomWorldY + entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true ) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() || gamePanel.tileManager.tile[tileNumberTwo].isCollision()) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -40,7 +40,7 @@ public class CollisionManager {
                 entityLeftColumn = (entityLeftWorldX - entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true ) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() || gamePanel.tileManager.tile[tileNumberTwo].isCollision()) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -48,7 +48,7 @@ public class CollisionManager {
                 entityRightColumn = (entityRightWorldX + entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() || gamePanel.tileManager.tile[tileNumberTwo].isCollision()) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -70,10 +70,10 @@ public class CollisionManager {
                     case "up":
                         entity.solidAreaOfThePlayer.y -= entity.getSpeed();
                         if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision == true) {
+                            if (gamePanel.superObjectsArray[i].collision) {
                                 entity.setCollisionOn(true);
                             }
-                            if (player == true) {
+                            if (player) {
                                 index = i;
                             }
                         }
@@ -81,10 +81,10 @@ public class CollisionManager {
                     case "down":
                         entity.solidAreaOfThePlayer.y += entity.getSpeed();
                         if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision == true) {
+                            if (gamePanel.superObjectsArray[i].collision) {
                                 entity.setCollisionOn(true);
                             }
-                            if (player == true) {
+                            if (player) {
                                 index = i;
                             }
                         }
@@ -92,10 +92,10 @@ public class CollisionManager {
                     case "left":
                         entity.solidAreaOfThePlayer.x -= entity.getSpeed();
                         if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision == true) {
+                            if (gamePanel.superObjectsArray[i].collision) {
                                 entity.setCollisionOn(true);
                             }
-                            if (player == true) {
+                            if (player) {
                                 index = i;
                             }
                         }
@@ -103,10 +103,10 @@ public class CollisionManager {
                     case "right":
                         entity.solidAreaOfThePlayer.x += entity.getSpeed();
                         if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision == true) {
+                            if (gamePanel.superObjectsArray[i].collision) {
                                 entity.setCollisionOn(true);
                             }
-                            if (player == true) {
+                            if (player) {
                                 index = i;
                             }
                         }

@@ -163,21 +163,26 @@ public class Player extends Entity{
             String objectName = gamePanel.superObjectsArray[i].name;
             switch (objectName) {
                 case "Key":
+                    gamePanel.playSoundEffect(1);
                     hasKey++;
                     gamePanel.superObjectsArray[i] = null;
-                    System.out.println("key" + hasKey);
+                    gamePanel.userInterface.displayMessage("Meow! you have a key");
                     break;
                 case "Door", "Trampoline":
                     if (hasKey > 0) {
+                        gamePanel.playSoundEffect(3);
                         gamePanel.superObjectsArray[i] = null;
                         hasKey--;
-                        System.out.println("key" + hasKey);
+                        gamePanel.userInterface.displayMessage("You open the door");
+                    } else {
+                        gamePanel.userInterface.displayMessage("You need a key!");
                     }
                     break;
                 case "Fish":
+                    gamePanel.playSoundEffect(4);
                     setSpeed(getSpeed() + 2);
                     gamePanel.superObjectsArray[i] = null;
-                    System.out.println("speed" + getSpeed());
+                    gamePanel.userInterface.displayMessage("Yummy time to speed up!");
                     break;
             }
         }
