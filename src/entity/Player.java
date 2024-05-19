@@ -17,6 +17,8 @@ public class Player extends Entity{
     private final int screenX;
     private final int screenY;
 
+    private int hasKey = 0;
+
     public Player(GamePanel gamePanel,KeyHandler keyHandler) {
         this.gamePanel = gamePanel;
         this.keyHandler = keyHandler;
@@ -27,6 +29,8 @@ public class Player extends Entity{
         solidAreaOfThePlayer = new Rectangle();
         solidAreaOfThePlayer.x = 8;
         solidAreaOfThePlayer.y = 16;
+        setSolidAreaDefaultX(solidAreaOfThePlayer.x);
+        setSolidAreaDefaultY(solidAreaOfThePlayer.y);
         solidAreaOfThePlayer.width = 32;
         solidAreaOfThePlayer.height = 32;
 
@@ -39,7 +43,7 @@ public class Player extends Entity{
         setSpeed(4);
         setDirection("down");
     }
-        public void getPlayerImage() {
+    public void getPlayerImage() {
             try {
                 setUp1(ImageIO.read(getClass().getResourceAsStream("/player/cat-up-1.png")));
                 setUp2(ImageIO.read(getClass().getResourceAsStream("/player/cat-up-2.png")));
@@ -70,8 +74,12 @@ public class Player extends Entity{
                 setDirection("right");
 
             }
+            // tile collision
             setCollisionOn(false);
             gamePanel.collisionManager.checkTile(this);
+            // check object Collision
+            int objectIndex = gamePanel.collisionManager.checkObject(this,true);
+            grapTheObject(objectIndex);
             // if collision false , player can move
             if (isCollisionOn() == false) {
                 switch (getDirection()) {
@@ -91,7 +99,7 @@ public class Player extends Entity{
 
             }
 
-            incrementSpriceCounter();
+            incrementSpriteCounter();
             if (getSpriteCounter() > 7) {
                 if (getSpriteNumber() == 1) {
                     setSpriteNumber(2);
@@ -150,6 +158,30 @@ public class Player extends Entity{
 
 
     }
+    public void grapTheObject(int i) {
+        if (i != 6969) {
+            String objectName = gamePanel.superObjectsArray[i].name;
+            switch (objectName) {
+                case "Key":
+                    hasKey++;
+                    gamePanel.superObjectsArray[i] = null;
+                    System.out.println("key" + hasKey);
+                    break;
+                case "Door", "Trampoline":
+                    if (hasKey > 0) {
+                        gamePanel.superObjectsArray[i] = null;
+                        hasKey--;
+                        System.out.println("key" + hasKey);
+                    }
+                    break;
+                case "Fish":
+                    setSpeed(getSpeed() + 2);
+                    gamePanel.superObjectsArray[i] = null;
+                    System.out.println("speed" + getSpeed());
+                    break;
+            }
+        }
+    }
 
     // getter setter
     public int getScreenX() {
@@ -158,6 +190,14 @@ public class Player extends Entity{
 
     public int getScreenY() {
         return screenY;
+    }
+
+    public int getHasKey() {
+        return hasKey;
+    }
+
+    public void setHasKey(int hasKey) {
+        this.hasKey = hasKey;
     }
 
 }

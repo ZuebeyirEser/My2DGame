@@ -27,20 +27,20 @@ public class GamePanel extends JPanel implements Runnable {
     // World Settings
     private final int maxWorldCol = 50;
     private final int maxWorldRow = 50;
-    private final int worldWidth = tileSize * maxWorldCol;
-    private final int worldHeight = tileSize * maxWorldRow;
-
-
-
     private int FPS = 60;
-    KeyHandler keyHandler = new KeyHandler();
 
-    Thread gameThread;
+
+    // System
+    Sound sound = new Sound();
+    KeyHandler keyHandler = new KeyHandler();
     public Player player = new Player(this,keyHandler);
     TileManager tileManager = new TileManager(this);
     public CollisionManager collisionManager = new CollisionManager(this);
+    Thread gameThread;
+
+    // Entity and Object
     public ObjectManager objectManager = new ObjectManager(this);
-    public SuperObjects[] superObjects = new SuperObjects[15];
+    public SuperObjects[] superObjectsArray = new SuperObjects[15];
 
     public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -51,6 +51,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
     public void setUpTheGame() {
         objectManager.setObject();
+        playMusic(0);
     }
 
     public void startGameThread() {
@@ -118,15 +119,28 @@ public class GamePanel extends JPanel implements Runnable {
         // tile
         tileManager.draw(graphics2D);
         // Object
-        for (int i = 0; i < superObjects.length;i++) {
-            if (superObjects[i] != null) {
-                superObjects[i].draw(graphics2D,this);
+        for (int i = 0; i < superObjectsArray.length; i++) {
+            if (superObjectsArray[i] != null) {
+                superObjectsArray[i].draw(graphics2D,this);
             }
         }
         // player
         player.draw(graphics2D);
 
         graphics2D.dispose();
+    }
+    public void playMusic(int i) {
+        sound.setFile(i);
+        sound.play();
+        sound.loop();
+    }
+    public void stopMusic() {
+        sound.stop();
+    }
+
+    public void playSoundEffect(int i) {
+        sound.setFile(i);
+        sound.play();
     }
 
 
@@ -177,11 +191,4 @@ public class GamePanel extends JPanel implements Runnable {
         return maxWorldRow;
     }
 
-    public int getWorldWidth() {
-        return worldWidth;
-    }
-
-    public int getWorldHeight() {
-        return worldHeight;
-    }
 }

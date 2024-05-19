@@ -22,7 +22,5 @@ public class MyGameStart {
         gamePanel.setUpTheGame();
         gamePanel.startGameThread();
 
-
-
     }
 }

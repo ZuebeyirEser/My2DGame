@@ -11,14 +11,15 @@ public class Entity {
     private String direction;
     private int spriteCounter = 0;
     private int spriteNumber = 1;
-
+    private boolean collisionOn = false;
     public Rectangle solidAreaOfThePlayer;
 
+    private int solidAreaDefaultX;
+    private int solidAreaDefaultY;
 
 
-    private boolean collisionOn = false;
 
-    public  void incrementSpriceCounter() {
+    public  void incrementSpriteCounter() {
         spriteCounter++;
     }
 
@@ -141,6 +142,19 @@ public class Entity {
     public void setCollisionOn(boolean collisionOn) {
         this.collisionOn = collisionOn;
     }
+    public int getSolidAreaDefaultX() {
+        return solidAreaDefaultX;
+    }
 
+    public void setSolidAreaDefaultX(int solidAreaDefaultX) {
+        this.solidAreaDefaultX = solidAreaDefaultX;
+    }
 
+    public int getSolidAreaDefaultY() {
+        return solidAreaDefaultY;
+    }
+
+    public void setSolidAreaDefaultY(int solidAreaDefaultY) {
+        this.solidAreaDefaultY = solidAreaDefaultY;
+    }
 }

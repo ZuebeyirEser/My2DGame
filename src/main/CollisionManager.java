@@ -24,7 +24,7 @@ public class CollisionManager {
                 entityTopRow = (entityTopWorldY - entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo ].collision == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -32,7 +32,7 @@ public class CollisionManager {
                 entityBottomRow = (entityBottomWorldY + entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo].collision == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true ) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -40,7 +40,7 @@ public class CollisionManager {
                 entityLeftColumn = (entityLeftWorldX - entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityLeftColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo].collision == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true ) {
                     entity.setCollisionOn(true);
                 }
                 break;
@@ -48,11 +48,79 @@ public class CollisionManager {
                 entityRightColumn = (entityRightWorldX + entity.getSpeed()) / gamePanel.getTileSize();
                 tileNumberOne = gamePanel.tileManager.mapTileNum[entityRightColumn][entityTopRow];
                 tileNumberTwo = gamePanel.tileManager.mapTileNum[entityRightColumn][entityBottomRow];
-                if (gamePanel.tileManager.tile[tileNumberOne].collision == true || gamePanel.tileManager.tile[tileNumberTwo ].collision == true) {
+                if (gamePanel.tileManager.tile[tileNumberOne].isCollision() == true  || gamePanel.tileManager.tile[tileNumberTwo].isCollision() == true) {
                     entity.setCollisionOn(true);
                 }
                 break;
         }
 
+    }
+    public int checkObject(Entity entity, boolean player) {
+        int index = 6969;
+        for (int i = 0; i < gamePanel.superObjectsArray.length; i++) {
+            if (gamePanel.superObjectsArray[i] != null) {
+                // get entity solid area position
+                entity.solidAreaOfThePlayer.x = entity.getWorldX() + entity.solidAreaOfThePlayer.x;
+                entity.solidAreaOfThePlayer.y = entity.getWorldY() + entity.solidAreaOfThePlayer.y;
+
+                // get object solid area position
+                gamePanel.superObjectsArray[i].solidArea.x = gamePanel.superObjectsArray[i].worldX + gamePanel.superObjectsArray[i].solidArea.x;
+                gamePanel.superObjectsArray[i].solidArea.y = gamePanel.superObjectsArray[i].worldY + gamePanel.superObjectsArray[i].solidArea.y;
+                switch (entity.getDirection()) {
+                    case "up":
+                        entity.solidAreaOfThePlayer.y -= entity.getSpeed();
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
+                            if (gamePanel.superObjectsArray[i].collision == true) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (player == true) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "down":
+                        entity.solidAreaOfThePlayer.y += entity.getSpeed();
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
+                            if (gamePanel.superObjectsArray[i].collision == true) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (player == true) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "left":
+                        entity.solidAreaOfThePlayer.x -= entity.getSpeed();
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
+                            if (gamePanel.superObjectsArray[i].collision == true) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (player == true) {
+                                index = i;
+                            }
+                        }
+                        break;
+                    case "right":
+                        entity.solidAreaOfThePlayer.x += entity.getSpeed();
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
+                            if (gamePanel.superObjectsArray[i].collision == true) {
+                                entity.setCollisionOn(true);
+                            }
+                            if (player == true) {
+                                index = i;
+                            }
+                        }
+                        break;
+                }
+                entity.solidAreaOfThePlayer.x =entity.getSolidAreaDefaultX();
+                entity.solidAreaOfThePlayer.y =entity.getSolidAreaDefaultY();
+                gamePanel.superObjectsArray[i].solidArea.x = gamePanel.superObjectsArray[i].solidAreaDefaultX;
+                gamePanel.superObjectsArray[i].solidArea.y = gamePanel.superObjectsArray[i].solidAreaDefaultY;
+
+            }
+
+
+        }
+        return index;
     }
 }
