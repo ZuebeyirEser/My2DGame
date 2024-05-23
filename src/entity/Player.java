@@ -184,6 +184,11 @@ public class Player extends Entity{
                     gamePanel.superObjectsArrayList.set(i, null);
                     gamePanel.userInterface.displayMessage("Yummy time to speed up!");
                     break;
+                case "Mouse":
+                    gamePanel.userInterface.setGameFinished(true);
+                    gamePanel.stopMusic();
+                    gamePanel.playSoundEffect(2);
+                    break;
             }
         }
     }
