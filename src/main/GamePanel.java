@@ -6,6 +6,7 @@ import tiles.TileManager;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class GamePanel extends JPanel implements Runnable {
 
@@ -41,7 +42,7 @@ public class GamePanel extends JPanel implements Runnable {
 
     // Entity and Object
     public ObjectManager objectManager = new ObjectManager(this);
-    public SuperObjects[] superObjectsArray = new SuperObjects[15];
+    public ArrayList<SuperObjects> superObjectsArrayList = new ArrayList<>();
 
     public UserInterface userInterface = new UserInterface(this);
 
@@ -122,9 +123,9 @@ public class GamePanel extends JPanel implements Runnable {
         // tile
         tileManager.draw(graphics2D);
         // Object
-        for (int i = 0; i < superObjectsArray.length; i++) {
-            if (superObjectsArray[i] != null) {
-                superObjectsArray[i].draw(graphics2D,this);
+        for (int i = 0; i < superObjectsArrayList.size(); i++) {
+            if (superObjectsArrayList.get(i) != null) {
+                superObjectsArrayList.get(i).draw(graphics2D,this);
             }
         }
         // player

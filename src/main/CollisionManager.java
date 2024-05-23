@@ -57,20 +57,20 @@ public class CollisionManager {
     }
     public int checkObject(Entity entity, boolean player) {
         int index = 6969;
-        for (int i = 0; i < gamePanel.superObjectsArray.length; i++) {
-            if (gamePanel.superObjectsArray[i] != null) {
+        for (int i = 0; i < gamePanel.superObjectsArrayList.size(); i++) {
+            if (gamePanel.superObjectsArrayList.get(i) != null) {
                 // get entity solid area position
                 entity.solidAreaOfThePlayer.x = entity.getWorldX() + entity.solidAreaOfThePlayer.x;
                 entity.solidAreaOfThePlayer.y = entity.getWorldY() + entity.solidAreaOfThePlayer.y;
 
                 // get object solid area position
-                gamePanel.superObjectsArray[i].solidArea.x = gamePanel.superObjectsArray[i].worldX + gamePanel.superObjectsArray[i].solidArea.x;
-                gamePanel.superObjectsArray[i].solidArea.y = gamePanel.superObjectsArray[i].worldY + gamePanel.superObjectsArray[i].solidArea.y;
+                gamePanel.superObjectsArrayList.get(i).solidArea.x = gamePanel.superObjectsArrayList.get(i).worldX + gamePanel.superObjectsArrayList.get(i).solidArea.x;
+                gamePanel.superObjectsArrayList.get(i).solidArea.y = gamePanel.superObjectsArrayList.get(i).worldY+ gamePanel.superObjectsArrayList.get(i).solidArea.y;
                 switch (entity.getDirection()) {
                     case "up":
                         entity.solidAreaOfThePlayer.y -= entity.getSpeed();
-                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision) {
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArrayList.get(i).solidArea)) {
+                            if (gamePanel.superObjectsArrayList.get(i).collision) {
                                 entity.setCollisionOn(true);
                             }
                             if (player) {
@@ -80,8 +80,8 @@ public class CollisionManager {
                         break;
                     case "down":
                         entity.solidAreaOfThePlayer.y += entity.getSpeed();
-                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision) {
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArrayList.get(i).solidArea)) {
+                            if (gamePanel.superObjectsArrayList.get(i).collision) {
                                 entity.setCollisionOn(true);
                             }
                             if (player) {
@@ -91,8 +91,8 @@ public class CollisionManager {
                         break;
                     case "left":
                         entity.solidAreaOfThePlayer.x -= entity.getSpeed();
-                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision) {
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArrayList.get(i).solidArea)) {
+                            if (gamePanel.superObjectsArrayList.get(i).collision) {
                                 entity.setCollisionOn(true);
                             }
                             if (player) {
@@ -102,8 +102,8 @@ public class CollisionManager {
                         break;
                     case "right":
                         entity.solidAreaOfThePlayer.x += entity.getSpeed();
-                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArray[i].solidArea)) {
-                            if (gamePanel.superObjectsArray[i].collision) {
+                        if (entity.solidAreaOfThePlayer.intersects(gamePanel.superObjectsArrayList.get(i).solidArea)) {
+                            if (gamePanel.superObjectsArrayList.get(i).collision) {
                                 entity.setCollisionOn(true);
                             }
                             if (player) {
@@ -114,8 +114,8 @@ public class CollisionManager {
                 }
                 entity.solidAreaOfThePlayer.x =entity.getSolidAreaDefaultX();
                 entity.solidAreaOfThePlayer.y =entity.getSolidAreaDefaultY();
-                gamePanel.superObjectsArray[i].solidArea.x = gamePanel.superObjectsArray[i].solidAreaDefaultX;
-                gamePanel.superObjectsArray[i].solidArea.y = gamePanel.superObjectsArray[i].solidAreaDefaultY;
+                gamePanel.superObjectsArrayList.get(i).solidArea.x = gamePanel.superObjectsArrayList.get(i).solidAreaDefaultX;
+                gamePanel.superObjectsArrayList.get(i).solidArea.y = gamePanel.superObjectsArrayList.get(i).solidAreaDefaultY;
 
             }
 

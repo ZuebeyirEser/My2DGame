@@ -160,18 +160,18 @@ public class Player extends Entity{
     }
     public void grapTheObject(int i) {
         if (i != 6969) {
-            String objectName = gamePanel.superObjectsArray[i].name;
+            String objectName = gamePanel.superObjectsArrayList.get(i).name;
             switch (objectName) {
                 case "Key":
                     gamePanel.playSoundEffect(1);
                     hasKey++;
-                    gamePanel.superObjectsArray[i] = null;
+                    gamePanel.superObjectsArrayList.set(i, null);
                     gamePanel.userInterface.displayMessage("Meow! you have a key");
                     break;
                 case "Door", "Trampoline":
                     if (hasKey > 0) {
                         gamePanel.playSoundEffect(3);
-                        gamePanel.superObjectsArray[i] = null;
+                        gamePanel.superObjectsArrayList.set(i, null);
                         hasKey--;
                         gamePanel.userInterface.displayMessage("You open the door");
                     } else {
@@ -181,7 +181,7 @@ public class Player extends Entity{
                 case "Fish":
                     gamePanel.playSoundEffect(4);
                     setSpeed(getSpeed() + 2);
-                    gamePanel.superObjectsArray[i] = null;
+                    gamePanel.superObjectsArrayList.set(i, null);
                     gamePanel.userInterface.displayMessage("Yummy time to speed up!");
                     break;
             }
