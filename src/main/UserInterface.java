@@ -4,6 +4,7 @@ import objects.ObjectKey;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.text.DecimalFormat;
 
 public class UserInterface {
     GamePanel gamePanel;
@@ -13,6 +14,12 @@ public class UserInterface {
     private boolean messageOn = false;
     private String message = "";
     private boolean gameFinished;
+    DecimalFormat decimalFormat = new DecimalFormat("#0.00");
+
+
+
+
+    private double playTime;
 
 
 
@@ -59,6 +66,10 @@ public class UserInterface {
             graphics2D.setColor(Color.GRAY);
             graphics2D.drawImage(bufferedImage, 5,550,gamePanel.getTileSize()/2,gamePanel.getTileSize()/2,null);
             graphics2D.drawString("x"+ gamePanel.player.getHasKey(), 27, 573);
+
+            // Play Time
+            playTime += (double) 1/60;
+            graphics2D.drawString("Time: "+ decimalFormat.format(playTime), gamePanel.getTileSize()*11,573);
 
             if (isMessageOn()) {
                 graphics2D.drawString(getMessage(), 55, 573);
@@ -108,6 +119,13 @@ public class UserInterface {
 
     public void setGameFinished(boolean gameFinished) {
         this.gameFinished = gameFinished;
+    }
+    public double getPlayTime() {
+        return playTime;
+    }
+
+    public void setPlayTime(double playTime) {
+        this.playTime = playTime;
     }
 
 }
